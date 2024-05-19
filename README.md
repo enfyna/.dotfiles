@@ -1,0 +1,5 @@
+Install dotfiles with:
+
+    stow .
+
+
