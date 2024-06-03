@@ -29,6 +29,7 @@ vim.opt.clipboard = "unnamedplus"
 
 vim.opt.virtualedit = "block"
 -- vim.opt.inccommand = "split"
+vim.opt.diffopt = "vertical"
 
 vim.opt.ignorecase = true
 

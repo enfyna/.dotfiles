@@ -10,13 +10,22 @@ require("lazy").setup({
         'tpope/vim-fugitive'
     },
     {
-        'windwp/nvim-ts-autotag'
-    },
-    {
-        'okuuva/auto-save.nvim',
-    },
-    {
         'cohama/lexima.vim'
+    },
+    {
+        'windwp/nvim-ts-autotag',
+        config = function()
+            require('nvim-ts-autotag').setup({})
+        end
+    },
+    {
+        "okuuva/auto-save.nvim",
+        cmd = "ASToggle",                         -- optional for lazy loading on command
+        event = { "InsertLeave", "TextChanged" }, -- optional for lazy loading on trigger events
+        opts = {
+            -- your config goes here
+            -- or just leave it empty :)
+        },
     },
     {
         'brenoprata10/nvim-highlight-colors',
@@ -33,9 +42,6 @@ require("lazy").setup({
             require('nvim-treesitter.configs').setup({
                 auto_install = true,
                 highlight = {
-                    enable = true,
-                },
-                autotag = {
                     enable = true,
                 },
                 incremental_selection = {
@@ -69,10 +75,14 @@ require("lazy").setup({
     },
     {
         'linux-cultist/venv-selector.nvim',
+        branch = 'regexp',
         dependencies = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
         event = 'VeryLazy', -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
         opts = {},
         keys = {},
+        config = function ()
+            require('venv-selector').setup({})
+        end
     },
     {
         'nvim-lualine/lualine.nvim',
@@ -112,8 +122,8 @@ require("lazy").setup({
                     dim_inactive = true,
                     transparent = true,
                     styles = {
-                        --constants = 'bold',
-                        --comments = 'italic',
+                        constants = 'bold',
+                        comments = 'italic',
                         --keywords = 'bold',
                         --types = 'italic,bold',
                     }
