@@ -10,7 +10,15 @@ require("lazy").setup({
         'tpope/vim-fugitive'
     },
     {
-        'cohama/lexima.vim'
+        'm4xshen/autoclose.nvim',
+        config = function ()
+            require('autoclose').setup({
+                options = {
+                    disable_when_touch = true,
+                    pair_spaces = true,
+                }
+            })
+        end
     },
     {
         'windwp/nvim-ts-autotag',
