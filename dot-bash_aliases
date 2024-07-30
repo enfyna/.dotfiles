@@ -20,7 +20,6 @@ alias tree='tree --dirsfirst -a -C'
 alias kitty='sh -c "kitty --start-as fullscreen --override background_image_layout=cscaled --override background_image=\$(find /usr/share/wallpapers/kitty -type f -name '*.png' | shuf -n 1)"'
 
 alias cdg='cd ~/Documents/GitHub'
-alias cdd='cd ~/Documents/Dersler'
 alias cdt='cd ~/Documents/Test'
 
 alias scrcpy='scrcpy --turn-screen-off'
