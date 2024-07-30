@@ -1,5 +1,5 @@
 Install dotfiles with:
 
-    stow .
+    stow --dotfiles .
 
 
