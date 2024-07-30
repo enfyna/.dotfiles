@@ -64,7 +64,7 @@ fi
 # |_|  |_|____/      |____/ \___/|____/  |_|   |_|  \___/|_| |_| |_| .__/ \__|
 #                                                                  |_|        
 
-ver=$( uname -r | cut -c1-5 )
+ver=$( uname -r | cut --delimiter="-" -f 1 )
 
 echo 
 echo
