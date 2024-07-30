@@ -17,7 +17,7 @@ alias brc='nvim ~/.bashrc'
 alias t='tree -L 1 -C -a --dirsfirst'
 alias tree='tree --dirsfirst -a -C'
 
-alias kitty='sh -c "kitty --start-as fullscreen --override background_image_layout=cscaled --override background_image=\$(find /usr/share/wallpapers/kitty -type f -name '*.png' | shuf -n 1)"'
+alias kitty='sh -c "kitty --start-as fullscreen --override background_image_layout=cscaled --override background_image=\$(ls ~/.config/kitty/wallpapers/*.png | shuf -n 1)"'
 
 alias cdg='cd ~/Documents/GitHub'
 alias cdt='cd ~/Documents/Test'
