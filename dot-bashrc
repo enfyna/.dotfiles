@@ -9,7 +9,6 @@
 
 . ~/.bash_aliases
 
-setxkbmap -option caps:swapescape
 stty -ixon #disable ctrl-s and ctrl-q in terminal
 shopt -s autocd #cd yazmadan klasöre gir
 shopt -s no_empty_cmd_completion #bos satırda tab çalıştırma
