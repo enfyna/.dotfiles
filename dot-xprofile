@@ -9,5 +9,5 @@
 #              |_|                           
 # 
 
-pkexec xfpm-power-backlight-helper --set-brightness 2000
+pkexec xfpm-power-backlight-helper --set-brightness 500
 setxkbmap -option caps:swapescape
