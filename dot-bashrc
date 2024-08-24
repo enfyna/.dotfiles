@@ -47,10 +47,15 @@ export PATH="/usr/lib/ccache:$PATH"
 # |  __/ ___) | |
 # |_|   |____/|_|
 #                
+rand=$((30 + $RANDOM % 8))
+git_branch() {
+    local branch=$(git branch 2> /dev/null | grep -e '^\*' | sed -E 's/^\*\ (.+)$/(\1)/')
+    echo "$branch"
+}
 
 if [ "$EUID" -ne 0 ]
     # user
-    then export PS1='\[\e[37m\]C:\w\n> \[\e[0m\]'
+    then export PS1="\[\e[37m\]C:\w\[\e[${rand}m\] \$(git_branch)\[\e[37m\]\]\n> \[\e[0m\]"
 
     # root 
     # \[\e[1m\e[37m\][\A]\[\e[32m\][\!]\[\e[37m\]:
