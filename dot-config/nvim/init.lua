@@ -11,7 +11,7 @@ require("lazy").setup({
     },
     {
         'm4xshen/autoclose.nvim',
-        config = function ()
+        config = function()
             require('autoclose').setup({
                 options = {
                     disable_when_touch = true,
@@ -21,9 +21,19 @@ require("lazy").setup({
         end
     },
     {
+        "SirZenith/oil-vcs-status",
+        config = true,
+        dependencies = {
+            "stevearc/oil.nvim",
+        },
+    },
+    {
         'stevearc/oil.nvim',
-        config = function ()
+        config = function()
             require('oil').setup({
+                win_options = {
+                    signcolumn = "yes:2",
+                },
                 view_options = {
                     show_hidden = true,
                 }
@@ -99,7 +109,7 @@ require("lazy").setup({
         event = 'VeryLazy', -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
         opts = {},
         keys = {},
-        config = function ()
+        config = function()
             require('venv-selector').setup({})
         end
     },
@@ -191,6 +201,19 @@ require("lazy").setup({
                 local cmp = require('cmp')
                 local cmp_action = lsp_zero.cmp_action()
 
+                local ls = require('luasnip')
+                vim.keymap.set({ 'i', 's' }, '<C-k>', function()
+                    if ls.expand_or_jumpable() then
+                        ls.expand_or_jump()
+                    end
+                end, { silent = true })
+
+                vim.keymap.set({ 'i', 's' }, '<C-j>', function()
+                    if ls.jumpable(-1) then
+                        ls.jump(-1)
+                    end
+                end, { silent = true })
+
                 cmp.setup({
                     formatting = {
                         format = lspkind.cmp_format {
@@ -217,15 +240,21 @@ require("lazy").setup({
                             require('luasnip').lsp_expand(args.body)
                         end,
                     },
-                    mapping = cmp.mapping.preset.insert({
-                        ["<Tab>"] = cmp.mapping.confirm({ select = true }),
+                    mapping = {
+                        ["<C-m>"] = cmp.mapping(
+                            cmp.mapping.confirm {
+                                select = true,
+                                cmp.ConfirmBehavior.Insert,
+                            },
+                            { 'i', 'c' }
+                        ),
                         ['<C-Space>'] = cmp.mapping.complete(),
                         ['<C-x>'] = cmp.mapping.abort(),
+                        ['<C-n>'] = cmp.mapping.select_next_item { cmp.ConfirmBehavior.Insert },
+                        ['<C-p>'] = cmp.mapping.select_prev_item { cmp.ConfirmBehavior.Insert },
                         ['<C-d>'] = cmp.mapping.scroll_docs(5),
                         ['<C-u>'] = cmp.mapping.scroll_docs(-5),
-                        ['<C-f>'] = cmp_action.luasnip_jump_forward(),
-                        ['<C-b>'] = cmp_action.luasnip_jump_backward(),
-                    }),
+                    },
                 })
             end
         },
