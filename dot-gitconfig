@@ -1,0 +1,13 @@
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[user]
+	name = Ramazan Aslan
+	email = ramazanaslan21901@gmail.com
+[alias]
+	cm = commit -m
+[branch]
+	sort = -committerdate
