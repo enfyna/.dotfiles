@@ -8,6 +8,11 @@
 	name = Ramazan Aslan
 	email = ramazanaslan21901@gmail.com
 [alias]
+	cma = commit --amend -m
 	cm = commit -m
+	ls = log --oneline
+	st = status -sb
 [branch]
 	sort = -committerdate
+[help]
+	autocorrect = 1
