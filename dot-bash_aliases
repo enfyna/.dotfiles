@@ -23,3 +23,4 @@ alias cdg='cd ~/Documents/GitHub'
 alias cdt='cd ~/Documents/Test'
 
 alias scrcpy='scrcpy --turn-screen-off'
+alias swapesc='setxkbmap -option caps:swapescape'
