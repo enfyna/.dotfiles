@@ -16,3 +16,7 @@
 	sort = -committerdate
 [help]
 	autocorrect = 1
+[init]
+	defaultBranch = main
+[core]
+	editor = nvim
