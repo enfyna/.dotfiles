@@ -1,168 +1,10 @@
-require("custom")
+require("custom.config")
 
-vim.g.python3_host_prog = "/home/oem/.pyenv/versions/neovim/bin/python"
+local plugins = require("custom.plugins")
 
 require("lazy").setup({
+    plugins,
     {
-        'theprimeagen/harpoon'
-    },
-    {
-        'tpope/vim-fugitive'
-    },
-    {
-        'm4xshen/autoclose.nvim',
-        config = function()
-            require('autoclose').setup({
-                options = {
-                    disable_when_touch = true,
-                    pair_spaces = true,
-                }
-            })
-        end
-    },
-    {
-        "SirZenith/oil-vcs-status",
-        config = true,
-        dependencies = {
-            "stevearc/oil.nvim",
-        },
-    },
-    {
-        'stevearc/oil.nvim',
-        config = function()
-            require('oil').setup({
-                win_options = {
-                    signcolumn = "yes:2",
-                },
-                view_options = {
-                    show_hidden = true,
-                }
-            })
-            vim.keymap.set("n", "<Leader> ", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-        end
-    },
-    {
-        'windwp/nvim-ts-autotag',
-        config = function()
-            require('nvim-ts-autotag').setup({})
-        end
-    },
-    {
-        "okuuva/auto-save.nvim",
-        cmd = "ASToggle",                         -- optional for lazy loading on command
-        event = { "InsertLeave", "TextChanged" }, -- optional for lazy loading on trigger events
-        opts = {
-            -- your config goes here
-            -- or just leave it empty :)
-        },
-    },
-    {
-        'brenoprata10/nvim-highlight-colors',
-        config = function()
-            require('nvim-highlight-colors').setup({
-                render = "background", -- background | foreground | virtual
-                enable_tailwind = true,
-            })
-        end
-    },
-    {
-        'nvim-treesitter/nvim-treesitter',
-        config = function()
-            require('nvim-treesitter.configs').setup({
-                auto_install = true,
-                highlight = {
-                    enable = true,
-                },
-                incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection = "<Leader>ss",
-                        node_incremental = "<Leader>si",
-                        node_decremental = "<Leader>sd",
-                        scope_incremental = "<Leader>sc",
-                    },
-                },
-            })
-        end,
-    },
-    {
-        'nvim-telescope/telescope.nvim',
-        tag = '0.1.5',
-        dependencies = { 'nvim-lua/plenary.nvim' },
-        config = function()
-            require('telescope').setup({
-                defaults = {
-                    layout_config = {
-                        horizontal = {
-                            preview_cutoff = 0,
-                            preview_width = 0.5,
-                        },
-                    },
-                },
-            })
-        end
-    },
-    {
-        'linux-cultist/venv-selector.nvim',
-        branch = 'regexp',
-        dependencies = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
-        event = 'VeryLazy', -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
-        opts = {},
-        keys = {},
-        config = function()
-            require('venv-selector').setup({})
-        end
-    },
-    {
-        'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
-        config = function()
-            require('lualine').setup({
-                sections = {
-                    lualine_x = {
-                        {
-                            'fileformat',
-                        },
-                        --{
-                        --    'encoding',
-                        --},
-                        --{
-                        --    'searchcount',
-                        --}
-                    },
-                    lualine_z = {
-                        {
-                            'filetype',
-                            colored = false,
-                            icon_only = true,
-                        },
-                    }
-                }
-            })
-        end
-    },
-    {
-        'projekt0n/github-nvim-theme',
-        --        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
-        --        priority = 1000, -- make sure to load this before all the other start plugins
-        config = function()
-            require('github-theme').setup({
-                options = {
-                    dim_inactive = true,
-                    transparent = true,
-                    styles = {
-                        constants = 'bold',
-                        comments = 'italic',
-                        --keywords = 'bold',
-                        --types = 'italic,bold',
-                    }
-                }
-            })
-            vim.cmd('colorscheme github_dark_default')
-        end,
-    },
-    {
-
         {
             'VonHeikemen/lsp-zero.nvim',
             branch = 'v3.x',
@@ -179,8 +21,6 @@ require("lazy").setup({
             lazy = false,
             config = true,
         },
-
-        -- Autocompletion
         {
             'hrsh7th/nvim-cmp',
             event = 'InsertEnter',
@@ -217,16 +57,12 @@ require("lazy").setup({
                 cmp.setup({
                     formatting = {
                         format = lspkind.cmp_format {
-                            mode = 'symbol_text',
-                            maxwidth = 50,
+                            mode = 'symbol',
+                            maxwidth = 17,
                             ellipsis_char = '...',
-                            show_labelDetails = true,
                             menu = ({
-                                buffer = "[Buffer]",
-                                nvim_lsp = "[LSP]",
-                                luasnip = "[LuaSnip]",
-                                nvim_lua = "[Lua]",
-                                latex_symbols = "[Latex]",
+                                buffer = "󰦪",
+                                nvim_lsp = "󰒍",
                             })
                         }
                     },
@@ -258,8 +94,6 @@ require("lazy").setup({
                 })
             end
         },
-
-        -- LSP
         {
             'neovim/nvim-lspconfig',
             cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
@@ -272,6 +106,8 @@ require("lazy").setup({
                 -- This is where all the LSP shenanigans will live
                 local lsp_zero = require('lsp-zero')
                 lsp_zero.extend_lspconfig()
+
+                require('lspconfig').dartls.setup({})
 
                 lsp_zero.configure('gdscript', {
                     force_setup = true, -- because the LSP is global. Read more on lsp-zero docs about this.
@@ -301,6 +137,5 @@ require("lazy").setup({
                 })
             end
         }
-
     },
 })

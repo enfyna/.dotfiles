@@ -13,7 +13,7 @@ vim.opt.isfname:append("@-@")
 
 --vim.opt.guicursor = ""
 
-vim.opt.signcolumn = "number"
+vim.opt.signcolumn = "yes"
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
