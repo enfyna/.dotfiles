@@ -57,7 +57,7 @@ HISTCONTROL=erasedups
 # |  __/ ___) | |
 # |_|   |____/|_|
 #                
-rand=$((30 + $RANDOM % 8))
+rand=$((31 + $RANDOM % 6))
 git_branch() {
     local branch=$(git branch 2> /dev/null | grep -e '^\*' | sed -E 's/^\*\ (.+)$/(\1)/')
     echo "$branch"
