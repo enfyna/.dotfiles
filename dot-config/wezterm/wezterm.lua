@@ -65,6 +65,14 @@ config.keys = {
         action = act.ActivatePaneDirection 'Next'
     },
     {
+        key = "F",
+        mods = 'CTRL|SHIFT',
+        action = act.PaneSelect {
+            mode = 'SwapWithActiveKeepFocus',
+            alphabet = '1234567890',
+        },
+    },
+    {
         key = 'H',
         mods = 'CTRL|SHIFT',
         action = act.AdjustPaneSize { 'Left', 1 },
@@ -83,6 +91,11 @@ config.keys = {
         key = 'L',
         mods = 'CTRL|SHIFT',
         action = act.AdjustPaneSize { 'Right', 1 },
+    },
+    {
+        key = ':',
+        mods = 'SHIFT|CTRL',
+        action = act.ActivateCopyMode
     },
     {
         key = "D",
