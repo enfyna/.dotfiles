@@ -21,6 +21,7 @@ wezterm.on('window-config-reloaded', function(window, pane)
     -- now act upon the flag
     if is_new_window then
         window:toggle_fullscreen()
+        window:focus()
     end
 end)
 
