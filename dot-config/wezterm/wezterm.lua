@@ -118,7 +118,45 @@ config.keys = {
             end
         end),
     },
+    {
+        key = 'Q',
+        mods = 'CTRL|SHIFT',
+        action = wezterm.action.EmitEvent 'set-bg-image'
+    },
 }
+
+local images_directory = "/home/oem/.config/kitty/wallpapers/"
+
+local function get_random_image()
+    local handle = io.popen('find "' ..
+        images_directory .. '" -type f \\( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" \\) | shuf -n 1')
+    if handle == nil then
+        return ""
+    end
+    local result = handle:read("*a")
+    handle:close()
+
+    return result:gsub("%s+$", "")
+end
+
+wezterm.on('set-bg-image', function(window, _)
+    local overrides = window:get_config_overrides() or {}
+    overrides.background = {
+        {
+            source = {
+                File = get_random_image()
+            },
+            hsb = {
+                brightness = 0.03
+            },
+            height = "Cover",
+            repeat_y = "NoRepeat",
+            vertical_align = "Middle",
+            horizontal_align = "Center",
+        }
+    }
+    window:set_config_overrides(overrides)
+end)
 
 -- and finally, return the configuration to wezterm
 return config
