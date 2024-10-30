@@ -6,7 +6,7 @@ local act = wezterm.action
 local config = wezterm.config_builder()
 
 -- Start Full Screen
-wezterm.on('window-config-reloaded', function(window, pane)
+wezterm.on('window-config-reloaded', function(window, _)
     -- approximately identify this gui window, by using the associated mux id
     local id = tostring(window:window_id())
 
@@ -27,6 +27,8 @@ end)
 
 -- X11
 config.enable_wayland = false
+
+config.warn_about_missing_glyphs = false
 
 config.window_decorations = "NONE"
 config.hide_mouse_cursor_when_typing = true
