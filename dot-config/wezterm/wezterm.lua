@@ -125,6 +125,11 @@ config.keys = {
         mods = 'CTRL|SHIFT',
         action = wezterm.action.EmitEvent 'set-bg-image'
     },
+    {
+        key = 'W',
+        mods = 'CTRL|SHIFT',
+        action = wezterm.action.EmitEvent 'clear-bg-image'
+    },
 }
 
 local images_directory = "/home/oem/.config/kitty/wallpapers/"
@@ -155,6 +160,18 @@ wezterm.on('set-bg-image', function(window, _)
             repeat_y = "NoRepeat",
             vertical_align = "Middle",
             horizontal_align = "Center",
+        }
+    }
+    window:set_config_overrides(overrides)
+end)
+
+wezterm.on('clear-bg-image', function(window, _)
+    local overrides = window:get_config_overrides() or {}
+    overrides.background = {
+        {
+            source = {
+                Color = "black"
+            },
         }
     }
     window:set_config_overrides(overrides)
