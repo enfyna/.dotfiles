@@ -3,24 +3,25 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
         require('lualine').setup({
+            options = {
+                section_separators = { left = '•', right = '•'},
+            },
             sections = {
+                lualine_b = { { 'branch' }, },
+                lualine_c = { { 'diff' }, },
                 lualine_x = {
-                    {
-                        'fileformat',
+                    { 'diagnostics' },
+                    { 'filename', symbols = {
+                        modified = '~',
+                        readonly = '®',
+                        unnamed = '',
+                        newfile = '[+]',
+                        }
                     },
-                    --{
-                    --    'encoding',
-                    --},
-                    --{
-                    --    'searchcount',
-                    --}
                 },
+                lualine_y = { { 'progress' }, },
                 lualine_z = {
-                    {
-                        'filetype',
-                        colored = false,
-                        icon_only = true,
-                    },
+                    { 'filetype', colored = false, icon_only = true, },
                 }
             }
         })
