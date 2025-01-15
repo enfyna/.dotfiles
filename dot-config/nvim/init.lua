@@ -1,6 +1,18 @@
-require("custom.config")
+require("config.remaps")
+require("config.opt")
+require("config.bootstrap_lazy")
 
-local plugins = require("custom.plugins")
+vim.g.python3_host_prog = "/home/oem/.pyenv/versions/neovim/bin/python"
+
+local plugins = require("plugins")
+
+-- highlight yanked text for 200ms using the "Visual" highlight group
+vim.cmd [[
+    augroup highlight_yank
+    autocmd!
+    au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=200})
+    augroup END
+]]
 
 require("lazy").setup({
     plugins,
@@ -108,7 +120,11 @@ require("lazy").setup({
                 lsp_zero.extend_lspconfig()
 
                 require('lspconfig').dartls.setup({})
-
+                require("lspconfig").clangd.setup({
+                    cmd = { "clangd",
+                        "--fallback-style=webkit",
+                    }
+                })
                 lsp_zero.configure('gdscript', {
                     force_setup = true, -- because the LSP is global. Read more on lsp-zero docs about this.
                     single_file_support = false,

@@ -20,6 +20,7 @@ wezterm.on('window-config-reloaded', function(window, _)
 
     -- now act upon the flag
     if is_new_window then
+        wezterm.sleep_ms(10)
         window:toggle_fullscreen()
         window:focus()
     end
@@ -38,11 +39,17 @@ config.inactive_pane_hsb = {
     saturation = 0.0,
     brightness = 0.1,
 }
-config.colors = {
-    cursor_bg = '#cccccc'
-}
 config.enable_tab_bar = false
-config.font_size = 16.0
+config.font_size = 14.0
+
+wezterm.font("FiraCode Nerd Font Mono",
+    {
+        weight = "Regular",
+        stretch = "Normal",
+        style = "Normal"
+    }
+) -- /usr/share/fonts/TTF/FiraCodeNerdFontMono-Regular.ttf, FontConfig
+
 config.window_padding = {
     left = 0,
     right = 0,
@@ -132,7 +139,8 @@ config.keys = {
     },
 }
 
-local images_directory = "/home/oem/.config/kitty/wallpapers/"
+local home = os.getenv("HOME")
+local images_directory = home .. "/Public/Wallpapers"
 
 local function get_random_image()
     local handle = io.popen('find "' ..

@@ -1,0 +1,101 @@
+return {
+    'thimc/gruber-darker.nvim',
+    config = function()
+        require('gruber-darker').setup({
+            -- OPTIONAL
+            transparent = true, -- removes the background
+            -- underline = false, -- disables underline fonts
+            -- bold = false, -- disables bold fonts
+        })
+        vim.cmd.colorscheme('gruber-darker')
+    end,
+}
+-- {
+--         'RRethy/base16-nvim',
+--         config = function()
+--             require('base16-colorscheme').setup({
+--                 base00 = "#000000",
+--                 base01 = "#2a2a2a",
+--                 base02 = "#555555",
+--                 base03 = "#808080",
+--                 base04 = "#a1a1a1",
+--                 base05 = "#c0c0c0",
+--                 base06 = "#e0e0e0",
+--                 base07 = "#ffffff",
+--                 base08 = "#ff0000",
+--                 base09 = "#ffff00",
+--                 base0A = "#e0e000",
+--                 base0B = "#00ff00",
+--                 base0C = "#0000ff",
+--                 base0D = "#00ffff",
+--                 base0E = "#ff00ff",
+--                 base0F = "#00e000",
+--             })
+--         end
+--     }
+-- {
+-- {
+--     "blazkowolf/gruber-darker.nvim",
+--     config = function()
+--         vim.cmd('colorscheme gruber-darker')
+--     end
+-- }
+-- {
+--     'projekt0n/github-nvim-theme',
+--     lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+--     priority = 1000, -- make sure to load this before all the other start plugins
+--     config = function()
+--         require('github-theme').setup({
+--             options = {
+--                 dim_inactive = true,
+--                 transparent = true,
+--                 styles = {
+--                     constants = 'bold',
+--                     comments = 'italic',
+--                     --keywords = 'bold',
+--                     --types = 'italic,bold',
+--                 }
+--             }
+--         })
+--         vim.cmd('colorscheme github_dark_default')
+--     end,
+-- }
+-- {
+--     'RRethy/base16-nvim',
+--     config = function()
+--         require('base16-colorscheme').setup({
+--             base00 = "#000000",
+--             base01 = "#2a2a2a",
+--             base02 = "#555555",
+--             base03 = "#808080",
+--             base04 = "#a1a1a1",
+--             base05 = "#c0c0c0",
+--             base06 = "#e0e0e0",
+--             base07 = "#ffffff",
+--             base08 = "#ff0000",
+--             base09 = "#808000",
+--             base0A = "#ffff00",
+--             base0B = "#00ff00",
+--             base0C = "#00ffff",
+--             base0D = "#0000ff",
+--             base0E = "#ff00ff",
+--             base0F = "#008000",
+--         })
+--     end
+-- }
+-- black
+-- darkish black
+-- brightish black
+-- bright black
+-- darker white
+-- white
+-- middle white
+-- bright white
+-- bright red
+-- yellow
+-- bright yellow
+-- bright green
+-- bright cyan
+-- bright blue
+-- bright magenta
+-- green

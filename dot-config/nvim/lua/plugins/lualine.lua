@@ -4,6 +4,7 @@ return {
     config = function()
         require('lualine').setup({
             options = {
+                component_seperators = { left = '•', right = '•'},
                 section_separators = { left = '•', right = '•'},
             },
             sections = {

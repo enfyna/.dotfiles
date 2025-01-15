@@ -17,6 +17,10 @@ unset HISTSIZE
 unset HISTFILESIZE
 HISTCONTROL=erasedups
 
+export EDITOR="nvim"
+export TERM="xterm-256color"
+
+export PATH="$PATH:/home/oem/.dotnet/tools"
 
 #  _____ _       _   _             ____  ____  _  __
 # |  ___| |_   _| |_| |_ ___ _ __ / ___||  _ \| |/ /

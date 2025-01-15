@@ -11,11 +11,11 @@ vim.opt.incsearch = true
 vim.opt.colorcolumn = "80"
 vim.opt.isfname:append("@-@")
 
---vim.opt.guicursor = ""
+vim.opt.guicursor = ""
 
 vim.opt.signcolumn = "yes"
 
-vim.opt.splitbelow = true
+-- vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 vim.opt.wrap = false
@@ -41,3 +41,6 @@ vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number,screenline"
 
 vim.opt.completeopt = { "menu", "menuone", "preview" }
+
+vim.opt.swapfile = false
+
