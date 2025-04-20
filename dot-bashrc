@@ -9,18 +9,17 @@
 
 . ~/.bash_aliases
 
-stty -ixon #disable ctrl-s and ctrl-q in terminal
-shopt -s autocd #cd yazmadan klasöre gir
-shopt -s no_empty_cmd_completion #bos satırda tab çalıştırma
+stty -ixon # disable ctrl-s and ctrl-q in terminal
+shopt -s autocd 
+shopt -s no_empty_cmd_completion 
 
 unset HISTSIZE 
 unset HISTFILESIZE
 HISTCONTROL=erasedups
 
 export EDITOR="nvim"
-export TERM="xterm-256color"
 
-export PATH="$PATH:/home/oem/.dotnet/tools"
+export PATH="$PATH:/home/ram/.dotnet/tools"
 
 #  _____ _       _   _             ____  ____  _  __
 # |  ___| |_   _| |_| |_ ___ _ __ / ___||  _ \| |/ /
@@ -64,7 +63,12 @@ export PATH="$PATH:/home/oem/.dotnet/tools"
 rand=$((31 + $RANDOM % 6))
 git_branch() {
     local branch=$(git branch 2> /dev/null | grep -e '^\*' | sed -E 's/^\*\ (.+)$/(\1)/')
-    echo "$branch"
+    local length=${#branch}
+    if [[ length -eq 0 ]] then
+        echo " "
+    else
+        echo " $branch "
+    fi
 }
 
 PROMPT_COMMAND='EXIT_STATUS=$?'
@@ -72,7 +76,7 @@ PROMPT_COMMAND='EXIT_STATUS=$?'
 if [ "$EUID" -ne 0 ]
 then
     # user
-    export PS1='\[\e[37m\]C:\w\[\e[${rand}m\] $(git_branch)\[\e[37m\]\n$(if [ $EXIT_STATUS -eq 0 ]; then echo "\[\e[37m\]"; else echo "\[\e[31m\]"; fi)> \[\e[0m\]'
+    export PS1='\[\e[37m\][\W]\[\e[${rand}m\]$(git_branch)\[\e[37m\]$(if [ $EXIT_STATUS -eq 0 ]; then echo "\[\e[37m\]"; else echo "\[\e[31m\]"; fi)> \[\e[0m\]'
 
     # root 
     # \[\e[1m\e[37m\][\A]\[\e[32m\][\!]\[\e[37m\]:
@@ -87,12 +91,12 @@ fi
 # |_|  |_|____/      |____/ \___/|____/  |_|   |_|  \___/|_| |_| |_| .__/ \__|
 #                                                                  |_|        
 
-ver=$( uname -r | cut --delimiter="-" -f 1 )
-
-echo 
-echo
-echo "Microsoft® Windows 95 [Version $ver]"
-echo "   © Copyright Microsoft Corp 1981-1996."
-echo
-echo
+# ver=$( uname -r | cut --delimiter="-" -f 1 )
+# 
+# echo 
+# echo
+# echo "Microsoft® Windows 95 [Version $ver]"
+# echo "   © Copyright Microsoft Corp 1981-1996."
+# echo
+# echo
 
