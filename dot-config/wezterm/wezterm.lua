@@ -20,8 +20,7 @@ wezterm.on('window-config-reloaded', function(window, _)
 
     -- now act upon the flag
     if is_new_window then
-        wezterm.sleep_ms(10)
-        window:toggle_fullscreen()
+        window:maximize()
         window:focus()
     end
 end)
@@ -31,7 +30,7 @@ config.enable_wayland = false
 
 config.warn_about_missing_glyphs = false
 
-config.window_decorations = "NONE"
+-- config.window_decorations = "NONE"
 config.hide_mouse_cursor_when_typing = true
 
 config.color_scheme = 'Windows NT (base16)'
@@ -40,7 +39,7 @@ config.inactive_pane_hsb = {
     brightness = 0.1,
 }
 config.enable_tab_bar = false
-config.font_size = 14.0
+config.font_size = 23.0
 
 wezterm.font("FiraCode Nerd Font Mono",
     {
