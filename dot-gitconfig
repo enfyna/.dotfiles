@@ -12,6 +12,7 @@
 	cm = commit -m
 	ls = log --oneline
 	st = status -sb
+        staash = stash --all
 [branch]
 	sort = -committerdate
 [help]
