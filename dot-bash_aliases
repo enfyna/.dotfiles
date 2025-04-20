@@ -15,13 +15,14 @@ alias ll='ls -Shlac --group-directories-first'
 alias n='nvim .'
 alias ng='nvim . --listen 127.0.0.1:55432' # godot lsp
 alias brc='nvim ~/.bashrc'
+alias enc='nvim ~/.config/nvim/init.lua'
 
 alias t='tree -L 1 -C -a --dirsfirst'
 alias tree='tree --dirsfirst -a -C'
 
 alias kitty='sh -c "kitty --start-as fullscreen --override background_image_layout=cscaled --override background_image=\$(ls ~/Public/Wallpapers/*.png | shuf -n 1)"'
 
-alias cdg='cd ~/Documents/GitHub'
+alias cdg='cd ~/Documents/Git'
 alias cdt='cd ~/Documents/Test'
 
 alias scrcpy='scrcpy --turn-screen-off'
