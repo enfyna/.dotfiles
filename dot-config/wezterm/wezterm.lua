@@ -34,12 +34,13 @@ config.warn_about_missing_glyphs = false
 config.hide_mouse_cursor_when_typing = true
 
 config.color_scheme = 'Windows NT (base16)'
+config.colors = { foreground = '#FFFFFF' }
 config.inactive_pane_hsb = {
     saturation = 0.0,
     brightness = 0.1,
 }
 config.enable_tab_bar = false
-config.font_size = 23.0
+config.font_size = 27.0
 
 wezterm.font("FiraCode Nerd Font Mono",
     {

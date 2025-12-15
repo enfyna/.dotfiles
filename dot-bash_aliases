@@ -7,20 +7,18 @@
 # (_)____/ \__,_|___/_| |_|___/_/   \_\_|_|\__,_|___/\___||___/
 #                        |_____|                               
 
-alias con='connmanctl'
-
 alias sl='ls'
 alias ll='ls -Shlac --group-directories-first'
-
-alias n='nvim .'
-alias ng='nvim . --listen 127.0.0.1:55432' # godot lsp
-alias brc='nvim ~/.bashrc'
-alias enc='nvim ~/.config/nvim/init.lua'
-
-alias t='tree -L 1 -C -a --dirsfirst'
 alias tree='tree --dirsfirst -a -C'
 
-alias kitty='sh -c "kitty --start-as fullscreen --override background_image_layout=cscaled --override background_image=\$(ls ~/Public/Wallpapers/*.png | shuf -n 1)"'
+alias n='nvim .'
+# alias ng='nvim . --listen 127.0.0.1:55432' # godot lsp
+
+alias enc='nvim ~/.config/nvim/init.lua'
+alias ebrc='nvim ~/.bashrc'
+alias enix='sudo nvim /etc/nixos/configuration.nix && sudo nixos-rebuild switch --log-format bar-with-logs'
+
+alias venv='. venv/bin/activate'
 
 alias cdg='cd ~/Documents/Git'
 alias cdt='cd ~/Documents/Test'

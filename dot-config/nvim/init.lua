@@ -1,13 +1,13 @@
 local lazy = require("bootstrap_lazy")
 
-vim.g.mapleader = " "
+vim.g.mapleader = ";"
 
 lazy.setup({
     {
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter',
         dependencies = {
-            { 'L3MON4D3/LuaSnip' },
+            { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
             { 'onsails/lspkind.nvim' },
             { 'hrsh7th/cmp-path' },
             { 'hrsh7th/cmp-buffer' },
@@ -59,6 +59,7 @@ lazy.setup({
                     ['<C-p>'] = cmp.mapping.select_prev_item { cmp.ConfirmBehavior.Insert },
                     ['<C-d>'] = cmp.mapping.scroll_docs(5),
                     ['<C-u>'] = cmp.mapping.scroll_docs(-5),
+                    ['<CR>'] = cmp.mapping.confirm { select = false },
                 },
             })
         end,
@@ -78,19 +79,41 @@ lazy.setup({
             { 'williamboman/mason-lspconfig.nvim' },
         },
         config = function()
-            require("mason-lspconfig").setup()
-            require('lspconfig').clangd.setup({ -- dont install clangd from mason
+            vim.lsp.enable('angularls')
+            vim.lsp.config('clangd', { -- dont install clangd from mason
                 cmd = { 
                     "clangd",
                     "--fallback-style=webkit",
                 }
             })
-            require("mason-lspconfig").setup_handlers {
-                -- :h mason-lspconfig-automatic-server-setup
-                function (server_name)
-                    require("lspconfig")[server_name].setup {}
-                end,
-            }
+            vim.lsp.enable('clangd')
+
+            require("mason-lspconfig").setup {
+                handlers = {
+                    function(server_name)
+                        if server_name == 'omnisharp' then
+                            -- Omnisharp for Unity
+                            local pid = vim.fn.getpid()
+                            local omnisharp_bin = "$HOME/.local/share/nvim/mason/bin/OmniSharp"
+                            vim.lsp.config('omnisharp', {
+                                on_attach = on_attach,
+                                flags = {
+                                  debounce_text_changes = 150,
+                                },
+                                cmd = { 
+                                    omnisharp_bin,
+                                    "--languageserver",
+                                    "--hostPID",
+                                    tostring(pid) 
+                                };
+                            })
+                            vim.lsp.enable('omnisharp')
+                        else
+                            vim.lsp.enable(server_name)
+                        end
+                    end,
+                }
+	    }
         end,
     },
     {
@@ -117,6 +140,9 @@ lazy.setup({
                 },
                 view_options = {
                     show_hidden = true,
+                },
+                keymaps = {
+                    ["<C-j>"] = "actions.select",
                 }
             })
         end,
@@ -143,6 +169,12 @@ lazy.setup({
                         width = function(_, max_lines)
                             return math.floor(max_lines)
                         end,
+                    },
+                    mappings = {
+                        i = {
+                            ["<esc>"] = "close",
+                            ["<C-j>"] = "select_default",
+                        },
                     },
                 },
                 extensions = {
@@ -194,7 +226,7 @@ lazy.setup({
     {
         'okuuva/auto-save.nvim',
         cmd = "ASToggle",
-        event = { "InsertLeave", "TextChanged" },
+        event = { "BufLeave" },
         opts = { }
     },
     {
@@ -221,12 +253,6 @@ lazy.setup({
     },
 })
 
--- format before saving
-vim.api.nvim_create_autocmd("BufWritePre", {
-    callback = function()
-        vim.lsp.buf.format({ async = false })
-    end,
-})
 
 -- opt start
 vim.opt.number = true
@@ -254,7 +280,8 @@ vim.opt.expandtab = true
 
 
 -- remaps start
-vim.keymap.set("n", "<Leader> ", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+vim.keymap.set("n", "<Leader>fo", "<Cmd>lua vim.lsp.buf.format({ async = false })<CR>")
+vim.keymap.set("n", "<Leader><Leader>", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 vim.keymap.set("n", "<Leader>ca", "<Cmd>lua vim.lsp.buf.code_action()<CR>")
 vim.keymap.set("n", "<Leader>rr", "<Cmd>lua vim.lsp.buf.rename()<CR>")
 vim.keymap.set("n", "<Leader>w", "<C-w>w")
@@ -270,6 +297,7 @@ local telescope = require('telescope.builtin')
 vim.keymap.set("n", "<Leader>fh", telescope.help_tags)
 vim.keymap.set("n", "<Leader>ff", telescope.find_files, {})
 vim.keymap.set("n", "<Leader>ft", telescope.live_grep, {})
+vim.keymap.set("n", "<Leader>fd", telescope.diagnostics, {})
 
 -- vim-fugitive
 
@@ -359,5 +387,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.diagnostic.config({
     virtual_text = true,
 })
+
+-- refresh CodeLens on events
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+  callback = function()
+    vim.lsp.codelens.refresh()
+  end,
+})
+
 -- visual stuff end
 
