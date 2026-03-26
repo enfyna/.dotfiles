@@ -50,6 +50,7 @@ wezterm.font("FiraCode Nerd Font Mono",
     }
 ) -- /usr/share/fonts/TTF/FiraCodeNerdFontMono-Regular.ttf, FontConfig
 
+-- config.window_background_opacity = 0.6
 config.window_padding = {
     left = 0,
     right = 0,

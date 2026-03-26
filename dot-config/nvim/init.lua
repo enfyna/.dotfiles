@@ -253,7 +253,6 @@ lazy.setup({
     },
 })
 
-
 -- opt start
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -276,6 +275,8 @@ vim.opt.tabstop = 8
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 -- opt end
 
 
@@ -291,6 +292,8 @@ vim.keymap.set("i", "<C-s>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>")
 vim.keymap.set("n", "<Leader>'", ":norm gcip<CR>")
 vim.keymap.set("n", "<Leader>i", ":norm gcc<CR>")
 vim.keymap.set("x", "<Leader>i", ":norm gcc<CR>")
+vim.keymap.set("n", "<Leader>t", ":vsplit term://bash<CR>i")
+vim.cmd(":tnoremap <Esc> <C-\\><C-n>")
 
 local telescope = require('telescope.builtin')
 
@@ -301,8 +304,8 @@ vim.keymap.set("n", "<Leader>fd", telescope.diagnostics, {})
 
 -- vim-fugitive
 
-vim.keymap.set("n", "<Leader>gg", function() vim.cmd('vert Git') end)
-vim.keymap.set("n", "<Leader>gf", ":Gvdiffsplit <CR>")
+vim.keymap.set("n", "<Leader>gg", ":vert Git<CR>")
+vim.keymap.set("n", "<Leader>gf", ":Gvdiffsplit<CR>")
 
 local ls = require('luasnip')
 
@@ -321,8 +324,8 @@ end, { silent = true })
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 
-vim.keymap.set("n", "<Leader>a", mark.add_file)
-vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
+vim.keymap.set("n", "<Leader><C-a>", mark.add_file)
+vim.keymap.set("n", "<Leader><C-e>", ui.toggle_quick_menu)
 
 vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
 vim.keymap.set("n", "<C-j>", function() ui.nav_file(2) end)
@@ -396,4 +399,3 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
 })
 
 -- visual stuff end
-

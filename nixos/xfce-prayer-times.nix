@@ -7,7 +7,7 @@ pkgs.stdenv.mkDerivation {
       owner = "enfyna";
       repo = "xfce-prayer-times";
       rev = "main";
-      sha256 = "sha256-JH/5MlD4wKp19uZaDH0ASYngBv7ESfNaW3BG5OJFMzM=";
+      sha256 = "sha256-kyg7Q/4LfII//NP2++I3h9KCsy0vpNwaL7uff16Gtcc=";
     };
 
     nativeBuildInputs = [

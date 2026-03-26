@@ -18,11 +18,29 @@ alias enc='nvim ~/.config/nvim/init.lua'
 alias ebrc='nvim ~/.bashrc'
 alias enix='sudo nvim /etc/nixos/configuration.nix && sudo nixos-rebuild switch --log-format bar-with-logs'
 
+create_venv(){
+    python -m venv venv || return;
+    echo "Created venv successfully! Activating...";
+    . venv/bin/activate
+}
+
 alias venv='. venv/bin/activate'
+
+alias rm='rm -v '
 
 alias cdg='cd ~/Documents/Git'
 alias cdt='cd ~/Documents/Test'
 
-alias scrcpy='scrcpy --turn-screen-off'
-alias swapesc='setxkbmap -option caps:swapescape'
+alias fchat='cd ~/Documents/Git/fchat/ && nix-shell'
+
+download_youtube_audio_mp3(){
+    echo $1 >> ~/Music/.list
+    yt-dlp -x --audio-format mp3 -o "~/Music/%(title)s.%(ext)s" $1
+}
+
+download_youtube_video_mp4(){
+    yt-dlp --output-merge-format mp4 $1
+}
+
+alias scrcpy='scrcpy --turn-screen-off --render-driver=opengl'
 alias screenkey='screenkey -s small -p fixed -g 10%x5%+88%+50%'
